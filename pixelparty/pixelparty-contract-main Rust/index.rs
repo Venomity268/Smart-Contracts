@@ -26,7 +26,7 @@ struct FrameData {
 #[derive(BorshDeserialize, BorshSerialize)]
 struct FrameMetadata {
     owner: AccountId,
-    price: u32,
+    price: u32, // *possible feature* Pricing Mechanism should be added here for frames.
     created_at: u64,
 }
 
@@ -44,7 +44,7 @@ struct PixelArtContract {
     frame_data_map: PersistentMap<TokenId, FrameData>,
     frame_metadata_map: PersistentMap<TokenId, FrameMetadata>,
     history: PersistentDeque<HistoryEntry>,
-    contract_owner: AccountId,
+    contract_owner: AccountId, // *possible feature* Access Control feature should track the contract owner here.
 }
 
 impl Default for PixelArtContract {
@@ -53,7 +53,7 @@ impl Default for PixelArtContract {
             frame_data_map: PersistentMap::new(b"f".to_vec()),
             frame_metadata_map: PersistentMap::new(b"m".to_vec()),
             history: PersistentDeque::new(b"h".to_vec()),
-            contract_owner: env::current_account_id(),
+            contract_owner: env::current_account_id(), // *possible feature* Access Control feature should set the initial contract owner here.
         }
     }
 }
@@ -172,4 +172,3 @@ impl PixelArtContract {
 /**************************/
 
 // ... (unit tests)
-
